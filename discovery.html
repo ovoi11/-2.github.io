@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>发现</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.5;
+        }
+        
+        /* 顶部栏 */
+        .top-bar {
+            background-color: #fff;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .top-bar .title {
+            text-align: center;
+            flex: 1;
+        }
+        
+        .top-bar .title h1 {
+            font-size: 18px;
+            font-weight: 600;
+        }
+        
+        /* 搜索栏 */
+        .search-bar {
+            background-color: #fff;
+            padding: 15px;
+            margin: 10px;
+            border-radius: 16px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .search-input {
+            width: 100%;
+            padding: 10px 15px;
+            border: 1px solid #e0e0e0;
+            border-radius: 20px;
+            font-size: 14px;
+            outline: none;
+        }
+        
+        /* 地图区域 */
+        .map-section {
+            background-color: #fff;
+            margin: 10px;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .map-title {
+            padding: 15px;
+            font-size: 16px;
+            font-weight: bold;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .map-container {
+            height: 200px;
+            background-color: #f0f8ff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #3A80E8;
+            font-size: 14px;
+        }
+        
+        /* 服务分类 */
+        .service-category {
+            background-color: #fff;
+            margin: 10px;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .category-title {
+            padding: 15px;
+            font-size: 16px;
+            font-weight: bold;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .category-list {
+            padding: 10px;
+        }
+        
+        .category-item {
+            padding: 15px;
+            border-bottom: 1px solid #EEEEEE;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            background-color: #fff;
+        }
+        
+        .category-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+        
+        /* 热门活动 */
+        .hot-activities {
+            background-color: #fff;
+            margin: 10px;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .activities-title {
+            padding: 15px;
+            font-size: 16px;
+            font-weight: bold;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .activities-scroll {
+            padding: 15px;
+            display: flex;
+            overflow-x: auto;
+            gap: 15px;
+        }
+        
+        .activity-card {
+            min-width: 200px;
+            height: 120px;
+            background: linear-gradient(135deg, #FFF8EE 0%, #FFE8CC 100%);
+            border-radius: 12px;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        
+        .activity-card h3 {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        /* 养老机构 */
+        .elderly-institutions {
+            background-color: #fff;
+            margin: 10px;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 70px;
+        }
+        
+        .institutions-title {
+            padding: 15px;
+            font-size: 16px;
+            font-weight: bold;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .institution-list {
+            padding: 10px;
+        }
+        
+        .institution-item {
+            padding: 15px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .institution-item:last-child {
+            border-bottom: none;
+        }
+        
+        .institution-name {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+        
+        .institution-info {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 8px;
+        }
+        
+        .institution-rating {
+            color: #FFB800;
+            font-size: 14px;
+        }
+        
+        /* 底部导航栏 */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: #fff;
+            display: flex;
+            box-shadow: 0 -2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .nav-item {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 10px 0;
+            color: #999;
+        }
+        
+        .nav-item.active {
+            color: #3A80E8;
+        }
+        
+        .nav-icon {
+            font-size: 20px;
+            margin-bottom: 5px;
+        }
+        
+        .nav-text {
+            font-size: 12px;
+        }
+        
+        /* 响应式设计 - 移动端竖屏优先 */
+        @media (max-width: 767px) {
+            /* 确保在小屏幕上的布局 */
+            .top-bar {
+                padding: 12px;
+            }
+            
+            .top-bar .title h1 {
+                font-size: 16px;
+            }
+            
+            .search-bar {
+                padding: 12px;
+                margin: 8px;
+            }
+            
+            .map-section,
+            .service-category,
+            .hot-activities,
+            .elderly-institutions {
+                margin: 8px;
+            }
+            
+            .map-title,
+            .category-title,
+            .activities-title,
+            .institutions-title {
+                padding: 12px;
+                font-size: 14px;
+            }
+            
+            .map-container {
+                height: 180px;
+            }
+            
+            .category-list,
+            .activities-scroll,
+            .institution-list {
+                padding: 12px;
+            }
+            
+            .category-item {
+                padding: 12px;
+            }
+            
+            .activity-card {
+                min-width: 180px;
+                height: 100px;
+                padding: 12px;
+            }
+            
+            .activity-card h3 {
+                font-size: 14px;
+            }
+            
+            .institution-item {
+                padding: 12px;
+            }
+            
+            .institution-name {
+                font-size: 14px;
+            }
+            
+            .nav-icon {
+                font-size: 18px;
+            }
+            
+            .nav-text {
+                font-size: 11px;
+            }
+        }
+        
+        @media (min-width: 768px) {
+            body {
+                max-width: 480px; /* 限制最大宽度为典型手机屏幕宽度 */
+                margin: 0 auto;
+                background-color: #f5f5f5;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 顶部栏 -->
+    <div class="top-bar">
+        <div style="width: 24px;"></div>
+        <div class="title">
+            <h1>发现</h1>
+        </div>
+        <div style="width: 24px;"></div>
+    </div>
+    
+    <!-- 搜索栏 -->
+    <div class="search-bar">
+        <input type="text" class="search-input" placeholder="搜索周边养老服务...">
+    </div>
+    
+    <!-- 地图区域 -->
+    <div class="map-section">
+        <div class="map-title">周边养老服务地图</div>
+        <div class="map-container">
+            <div>地图区域：显示老年食堂、日间照料中心、社区医院、养老机构点位</div>
+        </div>
+    </div>
+    
+    <!-- 服务分类 -->
+    <div class="service-category">
+        <div class="category-title">服务分类</div>
+        <div class="category-list">
+            <div class="category-item">就近就餐</div>
+            <div class="category-item">就近就医</div>
+            <div class="category-item">就近活动</div>
+            <div class="category-item">家政照护</div>
+        </div>
+    </div>
+    
+    <!-- 热门活动 -->
+    <div class="hot-activities">
+        <div class="activities-title">热门活动</div>
+        <div class="activities-scroll">
+            <div class="activity-card">
+                <h3>文艺演出</h3>
+                <p>社区文化活动</p>
+            </div>
+            <div class="activity-card">
+                <h3>手工课</h3>
+                <p>老年人手工制作</p>
+            </div>
+            <div class="activity-card">
+                <h3>健康讲座</h3>
+                <p>养生知识分享</p>
+            </div>
+            <div class="activity-card">
+                <h3>旅游踏青</h3>
+                <p>春季户外活动</p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 养老机构 -->
+    <div class="elderly-institutions">
+        <div class="institutions-title">养老机构查询</div>
+        <div class="institution-list">
+            <div class="institution-item">
+                <div class="institution-name">幸福养老院</div>
+                <div class="institution-info">距离：1.2公里 | 评分：4.5</div>
+                <div class="institution-rating">★★★★☆</div>
+            </div>
+            <div class="institution-item">
+                <div class="institution-name">夕阳红老年公寓</div>
+                <div class="institution-info">距离：2.5公里 | 评分：4.8</div>
+                <div class="institution-rating">★★★★★</div>
+            </div>
+            <div class="institution-item">
+                <div class="institution-name">康乐老年服务中心</div>
+                <div class="institution-info">距离：3.1公里 | 评分：4.2</div>
+                <div class="institution-rating">★★★★☆</div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 底部导航栏 -->
+    <div class="bottom-nav">
+        <div class="nav-item" onclick="window.location.href='smart_elderly_care.html'">
+            <div class="nav-icon">🏠</div>
+            <div class="nav-text">首页</div>
+        </div>
+        <div class="nav-item active">
+            <div class="nav-icon">📋</div>
+            <div class="nav-text">发现</div>
+        </div>
+        <div class="nav-item" onclick="window.location.href='message.html'">
+            <div class="nav-icon">💬</div>
+            <div class="nav-text">消息</div>
+        </div>
+        <div class="nav-item" onclick="window.location.href='my.html'">
+            <div class="nav-icon">👤</div>
+            <div class="nav-text">我的</div>
+        </div>
+    </div>
+</body>
+</html>

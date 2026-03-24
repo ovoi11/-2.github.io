@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>政策解读 - 2024高龄补贴新调整</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.5;
+        }
+        
+        /* 顶部栏 */
+        .top-bar {
+            background-color: #fff;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .top-bar .back-btn {
+            font-size: 24px;
+            color: #333;
+            cursor: pointer;
+        }
+        
+        .top-bar .title {
+            text-align: center;
+            flex: 1;
+        }
+        
+        .top-bar .title h1 {
+            font-size: 18px;
+            font-weight: 600;
+        }
+        
+        /* 主体内容 */
+        .main-content {
+            padding: 20px;
+        }
+        
+        /* 视频播放区 */
+        .video-section {
+            background-color: #000;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        
+        .video-placeholder {
+            width: 100%;
+            height: 200px;
+            background-color: #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 16px;
+        }
+        
+        .video-controls {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .control-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: rgba(255,255,255,0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            cursor: pointer;
+        }
+        
+        /* 核心简介区 */
+        .intro-section {
+            background-color: #fff;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .video-title {
+            font-size: 20px;
+            font-weight: bold;
+            color: #e53935;
+            margin-bottom: 15px;
+        }
+        
+        .video-content {
+            font-size: 16px;
+            color: #333;
+            line-height: 1.5;
+        }
+        
+        /* 快捷操作区 */
+        .action-section {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .action-btn {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        .action-btn.primary {
+            background-color: #e53935;
+            color: #fff;
+        }
+        
+        .action-btn.secondary {
+            background-color: #f0f0f0;
+            color: #333;
+        }
+        
+        /* 相关推荐 */
+        .recommend-section {
+            background-color: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        
+        .section-title {
+            padding: 15px;
+            font-size: 16px;
+            font-weight: bold;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .recommend-scroll {
+            padding: 15px;
+            display: flex;
+            overflow-x: auto;
+            gap: 15px;
+        }
+        
+        .recommend-card {
+            min-width: 150px;
+            height: 100px;
+            background-color: #f9f9f9;
+            border-radius: 12px;
+            padding: 12px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            cursor: pointer;
+        }
+        
+        .recommend-title {
+            font-size: 14px;
+            font-weight: bold;
+        }
+        
+        /* 响应式设计 - 移动端竖屏优先 */
+        @media (max-width: 767px) {
+            /* 确保在小屏幕上的布局 */
+            .top-bar {
+                padding: 12px;
+            }
+            
+            .top-bar .title h1 {
+                font-size: 16px;
+            }
+            
+            .main-content {
+                padding: 15px;
+            }
+            
+            .video-placeholder {
+                height: 180px;
+                font-size: 14px;
+            }
+            
+            .control-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 16px;
+            }
+            
+            .intro-section {
+                padding: 15px;
+            }
+            
+            .video-title {
+                font-size: 18px;
+            }
+            
+            .video-content {
+                font-size: 14px;
+            }
+            
+            .action-btn {
+                padding: 10px;
+                font-size: 14px;
+            }
+            
+            .section-title {
+                padding: 12px;
+                font-size: 14px;
+            }
+            
+            .recommend-scroll {
+                padding: 12px;
+                gap: 10px;
+            }
+            
+            .recommend-card {
+                min-width: 120px;
+                height: 80px;
+                padding: 10px;
+            }
+            
+            .recommend-title {
+                font-size: 12px;
+            }
+        }
+        
+        @media (min-width: 768px) {
+            body {
+                max-width: 480px; /* 限制最大宽度为典型手机屏幕宽度 */
+                margin: 0 auto;
+                background-color: #f5f5f5;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 顶部栏 -->
+    <div class="top-bar">
+        <div class="back-btn" onclick="window.history.back()">←</div>
+        <div class="title">
+            <h1>政策解读</h1>
+        </div>
+        <div style="width: 24px;"></div>
+    </div>
+    
+    <!-- 主体内容 -->
+    <div class="main-content">
+        <!-- 视频播放区 -->
+        <div class="video-section">
+            <div class="video-placeholder" style="background-image: url('高龄补贴.jpg'); background-size: cover; background-position: center;">
+                <div style="background-color: rgba(0,0,0,0.5); padding: 10px; border-radius: 8px; color: white;">
+                    视频：工作人员讲解高龄补贴政策
+                </div>
+            </div>
+            <div class="video-controls">
+                <div class="control-btn" onclick="alert('播放/暂停')">▶</div>
+                <div class="control-btn" onclick="alert('全屏')">⛶</div>
+            </div>
+        </div>
+        
+        <!-- 核心简介区 -->
+        <div class="intro-section">
+            <div class="video-title">2024高龄补贴新调整，符合条件就能多领钱</div>
+            <div class="video-content">
+                本次调整覆盖本地年满80周岁的户籍老人，补贴金额最高上调至每月500元，符合条件的老人可通过本APP「补贴申领」入口线上办理，或到社区线下申请。
+            </div>
+        </div>
+        
+        <!-- 快捷操作区 -->
+        <div class="action-section">
+            <button class="action-btn primary" onclick="window.location.href='success.html'">收藏</button>
+            <button class="action-btn secondary" onclick="window.location.href='success.html'">去申领</button>
+        </div>
+        
+        <!-- 相关推荐 -->
+        <div class="recommend-section">
+            <div class="section-title">相关推荐</div>
+            <div class="recommend-scroll">
+                <div class="recommend-card" onclick="alert('查看养老服务补贴申领指南')">
+                    <div class="recommend-title">养老服务补贴申领指南</div>
+                </div>
+                <div class="recommend-card" onclick="alert('查看失能老人护理补贴说明')">
+                    <div class="recommend-title">失能老人护理补贴说明</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>上门陪护服务</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.5;
+        }
+        
+        /* 顶部栏 */
+        .top-bar {
+            background-color: #fff;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .top-bar .back-btn {
+            font-size: 24px;
+            color: #333;
+            cursor: pointer;
+        }
+        
+        .top-bar .title {
+            text-align: center;
+            flex: 1;
+        }
+        
+        .top-bar .title h1 {
+            font-size: 18px;
+            font-weight: 600;
+        }
+        
+        /* 主体内容 */
+        .main-content {
+            padding: 20px;
+        }
+        
+        /* 界面主题 */
+        .theme {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .theme h2 {
+            font-size: 20px;
+            font-weight: bold;
+            color: #e53935;
+        }
+        
+        /* 服务类型选择区 */
+        .service-types {
+            background-color: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        
+        .section-title {
+            padding: 15px;
+            font-size: 16px;
+            font-weight: bold;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .service-item {
+            padding: 15px;
+            border-bottom: 1px solid #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .service-item:last-child {
+            border-bottom: none;
+        }
+        
+        .service-info {
+            flex: 1;
+        }
+        
+        .service-icon {
+            font-size: 24px;
+            margin-right: 15px;
+        }
+        
+        .service-details {
+            flex: 1;
+        }
+        
+        .service-title {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .service-description {
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .service-button {
+            padding: 8px 16px;
+            background-color: #e53935;
+            color: #fff;
+            border: none;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        /* 陪护人员选择区 */
+        .caregivers {
+            background-color: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        
+        .caregiver-list {
+            padding: 15px;
+        }
+        
+        .caregiver-item {
+            padding: 15px;
+            border: 1px solid #e0e0e0;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .caregiver-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin-right: 15px;
+        }
+        
+        .caregiver-info {
+            flex: 1;
+        }
+        
+        .caregiver-name {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .caregiver-experience {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 5px;
+        }
+        
+        .caregiver-rating {
+            color: #FFB800;
+            font-size: 14px;
+        }
+        
+        /* 预约信息填写区 */
+        .booking-form {
+            background-color: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 70px;
+        }
+        
+        .form-content {
+            padding: 15px;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .form-label {
+            display: block;
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+        
+        .form-select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 14px;
+            background-color: #f9f9f9;
+        }
+        
+        .form-submit {
+            width: 100%;
+            padding: 12px;
+            background-color: #e53935;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        /* 底部固定按钮 */
+        .bottom-button {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            right: 20px;
+            padding: 15px;
+            background-color: #e53935;
+            color: #fff;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            z-index: 99;
+        }
+        
+        /* 响应式设计 - 移动端竖屏优先 */
+        @media (max-width: 767px) {
+            /* 确保在小屏幕上的布局 */
+            .top-bar {
+                padding: 12px;
+            }
+            
+            .top-bar .title h1 {
+                font-size: 16px;
+            }
+            
+            .main-content {
+                padding: 15px;
+            }
+            
+            .theme {
+                padding: 15px;
+            }
+            
+            .theme h2 {
+                font-size: 18px;
+            }
+            
+            .section-title {
+                padding: 12px;
+                font-size: 14px;
+            }
+            
+            .service-item {
+                padding: 12px;
+            }
+            
+            .service-icon {
+                font-size: 20px;
+                margin-right: 12px;
+            }
+            
+            .service-title {
+                font-size: 14px;
+            }
+            
+            .service-description {
+                font-size: 13px;
+            }
+            
+            .service-button {
+                padding: 6px 12px;
+                font-size: 12px;
+            }
+            
+            .caregiver-list {
+                padding: 12px;
+            }
+            
+            .caregiver-item {
+                padding: 12px;
+                margin-bottom: 12px;
+            }
+            
+            .caregiver-avatar {
+                width: 50px;
+                height: 50px;
+                font-size: 20px;
+            }
+            
+            .caregiver-name {
+                font-size: 14px;
+            }
+            
+            .caregiver-experience {
+                font-size: 13px;
+            }
+            
+            .form-content {
+                padding: 12px;
+            }
+            
+            .form-group {
+                margin-bottom: 12px;
+            }
+            
+            .form-label {
+                font-size: 13px;
+            }
+            
+            .form-select {
+                padding: 8px;
+                font-size: 13px;
+            }
+            
+            .form-submit {
+                padding: 10px;
+                font-size: 14px;
+            }
+            
+            .bottom-button {
+                padding: 12px;
+                font-size: 14px;
+                bottom: 15px;
+                left: 15px;
+                right: 15px;
+            }
+        }
+        
+        @media (min-width: 768px) {
+            body {
+                max-width: 480px; /* 限制最大宽度为典型手机屏幕宽度 */
+                margin: 0 auto;
+                background-color: #f5f5f5;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 顶部栏 -->
+    <div class="top-bar">
+        <div class="back-btn" onclick="window.history.back()">←</div>
+        <div class="title">
+            <h1>上门陪护服务</h1>
+        </div>
+        <div style="width: 24px;"></div>
+    </div>
+    
+    <!-- 主体内容 -->
+    <div class="main-content">
+        <!-- 界面主题 -->
+        <div class="theme">
+            <h2>贴心陪护·安心居家</h2>
+        </div>
+        
+        <!-- 服务类型选择区 -->
+        <div class="service-types">
+            <div class="section-title">服务类型</div>
+            <div class="service-item">
+                <div class="service-info">
+                    <div style="display: flex; align-items: center;">
+                        <div class="service-icon">💬</div>
+                        <div class="service-details">
+                            <div class="service-title">日常陪伴</div>
+                            <div class="service-description">陪聊读报、散步遛弯、情绪疏导，缓解独居孤独感</div>
+                        </div>
+                    </div>
+                </div>
+                <button class="service-button" onclick="window.location.href='success.html'">立即预约</button>
+            </div>
+            <div class="service-item">
+                <div class="service-info">
+                    <div style="display: flex; align-items: center;">
+                        <div class="service-icon">🏥</div>
+                        <div class="service-details">
+                            <div class="service-title">就医陪诊</div>
+                            <div class="service-description">陪同医院就诊、挂号、取药、检查，全程协助就医流程</div>
+                        </div>
+                    </div>
+                </div>
+                <button class="service-button" onclick="window.location.href='success.html'">立即预约</button>
+            </div>
+            <div class="service-item">
+                <div class="service-info">
+                    <div style="display: flex; align-items: center;">
+                        <div class="service-icon">🏠</div>
+                        <div class="service-details">
+                            <div class="service-title">生活照料</div>
+                            <div class="service-description">协助穿衣洗漱、助餐、家务整理、代购代办，解决日常琐事</div>
+                        </div>
+                    </div>
+                </div>
+                <button class="service-button" onclick="window.location.href='success.html'">立即预约</button>
+            </div>
+            <div class="service-item">
+                <div class="service-info">
+                    <div style="display: flex; align-items: center;">
+                        <div class="service-icon">🌙</div>
+                        <div class="service-details">
+                            <div class="service-title">夜间陪护</div>
+                            <div class="service-description">夜间居家陪护，应对突发状况，保障老人夜间安全</div>
+                        </div>
+                    </div>
+                </div>
+                <button class="service-button" onclick="window.location.href='success.html'">立即预约</button>
+            </div>
+        </div>
+        
+        <!-- 陪护人员选择区 -->
+        <div class="caregivers">
+            <div class="section-title">陪护人员</div>
+            <div class="caregiver-list">
+                <div class="caregiver-item">
+                    <div class="caregiver-avatar">👩‍⚕️</div>
+                    <div class="caregiver-info">
+                        <div class="caregiver-name">李护士</div>
+                        <div class="caregiver-experience">5年陪护经验</div>
+                        <div class="caregiver-rating">★★★★★</div>
+                    </div>
+                </div>
+                <div class="caregiver-item">
+                    <div class="caregiver-avatar">👨‍⚕️</div>
+                    <div class="caregiver-info">
+                        <div class="caregiver-name">王护工</div>
+                        <div class="caregiver-experience">3年陪护经验</div>
+                        <div class="caregiver-rating">★★★★☆</div>
+                    </div>
+                </div>
+                <div class="caregiver-item">
+                    <div class="caregiver-avatar">👩‍⚕️</div>
+                    <div class="caregiver-info">
+                        <div class="caregiver-name">张护士</div>
+                        <div class="caregiver-experience">7年陪护经验</div>
+                        <div class="caregiver-rating">★★★★★</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 预约信息填写区 -->
+        <div class="booking-form">
+            <div class="section-title">预约信息</div>
+            <div class="form-content">
+                <div class="form-group">
+                    <label class="form-label">服务日期</label>
+                    <select class="form-select">
+                        <option>请选择日期</option>
+                        <option>今天</option>
+                        <option>明天</option>
+                        <option>后天</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">服务时长</label>
+                    <select class="form-select">
+                        <option>请选择时长</option>
+                        <option>2小时</option>
+                        <option>4小时</option>
+                        <option>8小时</option>
+                        <option>24小时</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">服务地址</label>
+                    <select class="form-select">
+                        <option>请选择地址</option>
+                        <option>XX社区1号楼101室</option>
+                        <option>XX社区2号楼302室</option>
+                        <option>XX社区3号楼201室</option>
+                    </select>
+                </div>
+                <button class="form-submit" onclick="window.location.href='success.html'">提交预约</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 底部固定按钮 -->
+    <button class="bottom-button" onclick="alert('正在拨打服务咨询电话...')">服务咨询 一键拨打</button>
+</body>
+</html>

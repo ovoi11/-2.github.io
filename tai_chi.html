@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>太极养生</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.5;
+        }
+        
+        /* 顶部栏 */
+        .top-bar {
+            background-color: #fff;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .top-bar .back-btn {
+            font-size: 24px;
+            color: #333;
+            cursor: pointer;
+        }
+        
+        .top-bar .title {
+            text-align: center;
+            flex: 1;
+        }
+        
+        .top-bar .title h1 {
+            font-size: 18px;
+            font-weight: 600;
+        }
+        
+        /* 主体内容 */
+        .main-content {
+            padding: 20px;
+        }
+        
+        /* 界面主题 */
+        .theme {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .theme h2 {
+            font-size: 20px;
+            font-weight: bold;
+            color: #e53935;
+        }
+        
+        /* 顶部课程banner */
+        .course-banner {
+            background: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%);
+            padding: 20px;
+            border-radius: 16px;
+            margin-bottom: 20px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .banner-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #1565C0;
+        }
+        
+        .banner-button {
+            padding: 12px 30px;
+            background-color: #e53935;
+            color: #fff;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        /* 核心功能区 */
+        .core-functions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .function-card {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        
+        .function-card:hover {
+            transform: translateY(-2px);
+        }
+        
+        .function-icon {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+        
+        .function-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        /* 师资介绍区 */
+        .teachers {
+            background-color: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        
+        .section-title {
+            padding: 15px;
+            font-size: 16px;
+            font-weight: bold;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .teacher-list {
+            padding: 15px;
+        }
+        
+        .teacher-item {
+            padding: 15px;
+            border: 1px solid #e0e0e0;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .teacher-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin-right: 15px;
+        }
+        
+        .teacher-info {
+            flex: 1;
+        }
+        
+        .teacher-name {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .teacher-experience {
+            font-size: 14px;
+            color: #666;
+        }
+        
+        /* 活动风采区 */
+        .activity-showcase {
+            background-color: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 70px;
+        }
+        
+        .activities-scroll {
+            padding: 15px;
+            display: flex;
+            overflow-x: auto;
+            gap: 15px;
+        }
+        
+        .activity-card {
+            min-width: 200px;
+            height: 150px;
+            background-color: #f9f9f9;
+            border-radius: 12px;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        
+        .activity-image {
+            width: 100%;
+            height: 80px;
+            background-color: #e0e0e0;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+        
+        .activity-name {
+            font-size: 14px;
+            font-weight: bold;
+        }
+        
+        /* 底部固定按钮 */
+        .bottom-button {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            right: 20px;
+            padding: 15px;
+            background-color: #e53935;
+            color: #fff;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            z-index: 99;
+        }
+        
+        /* 响应式设计 - 移动端竖屏优先 */
+        @media (max-width: 767px) {
+            /* 确保在小屏幕上的布局 */
+            .top-bar {
+                padding: 12px;
+            }
+            
+            .top-bar .title h1 {
+                font-size: 16px;
+            }
+            
+            .main-content {
+                padding: 15px;
+            }
+            
+            .theme {
+                padding: 15px;
+            }
+            
+            .theme h2 {
+                font-size: 18px;
+            }
+            
+            .course-banner {
+                padding: 15px;
+            }
+            
+            .banner-title {
+                font-size: 16px;
+            }
+            
+            .banner-button {
+                padding: 10px 24px;
+                font-size: 14px;
+            }
+            
+            .core-functions {
+                gap: 10px;
+            }
+            
+            .function-card {
+                padding: 15px;
+            }
+            
+            .function-icon {
+                font-size: 28px;
+            }
+            
+            .function-title {
+                font-size: 14px;
+            }
+            
+            .section-title {
+                padding: 12px;
+                font-size: 14px;
+            }
+            
+            .teacher-list {
+                padding: 12px;
+            }
+            
+            .teacher-item {
+                padding: 12px;
+                margin-bottom: 12px;
+            }
+            
+            .teacher-avatar {
+                width: 50px;
+                height: 50px;
+                font-size: 20px;
+            }
+            
+            .teacher-name {
+                font-size: 14px;
+            }
+            
+            .teacher-experience {
+                font-size: 13px;
+            }
+            
+            .activities-scroll {
+                padding: 12px;
+                gap: 10px;
+            }
+            
+            .activity-card {
+                min-width: 160px;
+                height: 120px;
+                padding: 12px;
+            }
+            
+            .activity-image {
+                height: 60px;
+                font-size: 20px;
+            }
+            
+            .activity-name {
+                font-size: 12px;
+            }
+            
+            .bottom-button {
+                padding: 12px;
+                font-size: 14px;
+                bottom: 15px;
+                left: 15px;
+                right: 15px;
+            }
+        }
+        
+        @media (min-width: 768px) {
+            body {
+                max-width: 480px; /* 限制最大宽度为典型手机屏幕宽度 */
+                margin: 0 auto;
+                background-color: #f5f5f5;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 顶部栏 -->
+    <div class="top-bar">
+        <div class="back-btn" onclick="window.history.back()">←</div>
+        <div class="title">
+            <h1>太极养生</h1>
+        </div>
+        <div style="width: 24px;"></div>
+    </div>
+    
+    <!-- 主体内容 -->
+    <div class="main-content">
+        <!-- 界面主题 -->
+        <div class="theme">
+            <h2>修身养性·健康延年</h2>
+        </div>
+        
+        <!-- 顶部课程banner -->
+        <div class="course-banner">
+            <div class="banner-title">零基础太极班 每周一三五 社区广场晨练</div>
+            <button class="banner-button" onclick="window.location.href='success.html'">立即报名</button>
+        </div>
+        
+        <!-- 核心功能区 -->
+        <div class="core-functions">
+            <div class="function-card" onclick="window.location.href='success.html'">
+                <div class="function-icon">📅</div>
+                <div class="function-title">课程报名</div>
+            </div>
+            <div class="function-card" onclick="window.location.href='success.html'">
+                <div class="function-icon">📹</div>
+                <div class="function-title">教学视频</div>
+            </div>
+            <div class="function-card" onclick="window.location.href='success.html'">
+                <div class="function-icon">🌅</div>
+                <div class="function-title">集体晨练</div>
+            </div>
+            <div class="function-card" onclick="window.location.href='success.html'">
+                <div class="function-icon">🧘</div>
+                <div class="function-title">养生知识</div>
+            </div>
+        </div>
+        
+        <!-- 师资介绍区 -->
+        <div class="teachers">
+            <div class="section-title">师资介绍</div>
+            <div class="teacher-list">
+                <div class="teacher-item">
+                    <div class="teacher-avatar">👨‍🏫</div>
+                    <div class="teacher-info">
+                        <div class="teacher-name">王师傅</div>
+                        <div class="teacher-experience">20年太极教学经验，杨氏太极传人</div>
+                    </div>
+                </div>
+                <div class="teacher-item">
+                    <div class="teacher-avatar">👩‍🏫</div>
+                    <div class="teacher-info">
+                        <div class="teacher-name">李老师</div>
+                        <div class="teacher-experience">15年太极教学经验，陈氏太极传人</div>
+                    </div>
+                </div>
+                <div class="teacher-item">
+                    <div class="teacher-avatar">👨‍🏫</div>
+                    <div class="teacher-info">
+                        <div class="teacher-name">张教练</div>
+                        <div class="teacher-experience">10年太极教学经验，吴氏太极传人</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 活动风采区 -->
+        <div class="activity-showcase">
+            <div class="section-title">活动风采</div>
+            <div class="activities-scroll">
+                <div class="activity-card">
+                    <div class="activity-image">🧘</div>
+                    <div class="activity-name">社区晨练</div>
+                </div>
+                <div class="activity-card">
+                    <div class="activity-image">🏆</div>
+                    <div class="activity-name">太极比赛</div>
+                </div>
+                <div class="activity-card">
+                    <div class="activity-image">🎭</div>
+                    <div class="activity-name">太极展演</div>
+                </div>
+                <div class="activity-card">
+                    <div class="activity-image">🌳</div>
+                    <div class="activity-name">户外太极</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 底部固定按钮 -->
+    <button class="bottom-button" onclick="alert('正在拨打太极班咨询电话...')">太极班咨询 一键拨打</button>
+</body>
+</html>

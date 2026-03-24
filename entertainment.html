@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>文化娱乐</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.5;
+        }
+        
+        /* 顶部栏 */
+        .top-bar {
+            background-color: #fff;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .top-bar .back-btn {
+            font-size: 24px;
+            color: #333;
+            cursor: pointer;
+        }
+        
+        .top-bar .title {
+            text-align: center;
+            flex: 1;
+        }
+        
+        .top-bar .title h1 {
+            font-size: 18px;
+            font-weight: 600;
+        }
+        
+        /* 主体内容 */
+        .main-content {
+            padding: 20px;
+        }
+        
+        /* 一级按钮 */
+        .primary-btn {
+            background-color: #e53935;
+            color: #fff;
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        /* 界面主题 */
+        .theme {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .theme h2 {
+            font-size: 20px;
+            font-weight: bold;
+            color: #e53935;
+        }
+        
+        /* 二级界面列表 */
+        .secondary-list {
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .list-item {
+            padding: 20px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .list-item:last-child {
+            border-bottom: none;
+        }
+        
+        .list-item h3 {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        
+        .list-item p {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.4;
+        }
+        
+        /* 首页按钮 */
+        .home-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #e53935;
+            color: #fff;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            cursor: pointer;
+            z-index: 99;
+        }
+        
+        /* 响应式设计 - 移动端竖屏优先 */
+        @media (max-width: 767px) {
+            /* 确保在小屏幕上的布局 */
+            .top-bar {
+                padding: 12px;
+            }
+            
+            .top-bar .title h1 {
+                font-size: 16px;
+            }
+            
+            .main-content {
+                padding: 15px;
+            }
+            
+            .primary-btn {
+                padding: 20px;
+                font-size: 20px;
+            }
+            
+            .theme {
+                padding: 15px;
+            }
+            
+            .theme h2 {
+                font-size: 18px;
+            }
+            
+            .list-item {
+                padding: 15px;
+            }
+            
+            .list-item h3 {
+                font-size: 14px;
+            }
+            
+            .list-item p {
+                font-size: 13px;
+            }
+            
+            .home-btn {
+                width: 50px;
+                height: 50px;
+                font-size: 18px;
+                bottom: 15px;
+                right: 15px;
+            }
+        }
+        
+        @media (min-width: 768px) {
+            body {
+                max-width: 480px; /* 限制最大宽度为典型手机屏幕宽度 */
+                margin: 0 auto;
+                background-color: #f5f5f5;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 顶部栏 -->
+    <div class="top-bar">
+        <div class="back-btn" onclick="window.history.back()">←</div>
+        <div class="title">
+            <h1>文化娱乐</h1>
+        </div>
+        <div style="width: 24px;"></div>
+    </div>
+    
+    <!-- 主体内容 -->
+    <div class="main-content">
+        <!-- 一级按钮 -->
+        <div class="primary-btn">娱</div>
+        
+        <!-- 界面主题 -->
+        <div class="theme">
+            <h2>乐享生活·银龄多彩</h2>
+        </div>
+        
+        <!-- 二级界面列表 -->
+        <div class="secondary-list">
+            <div class="list-item">
+                <h3>1. 活动报名</h3>
+                <p>社区文艺表演、棋牌比赛、手工课堂、节日庆典等活动线上报名，一键参与。</p>
+            </div>
+            <div class="list-item">
+                <h3>2. 银龄学堂</h3>
+                <p>老年大学线上课程，包含书法、绘画、声乐、舞蹈、智能手机使用、防诈骗学习等。</p>
+            </div>
+            <div class="list-item">
+                <h3>3. 兴趣圈子</h3>
+                <p>按爱好分类的兴趣社群，如摄影群、广场舞群、戏曲群、棋友群，方便老人交友交流。</p>
+            </div>
+            <div class="list-item">
+                <h3>4. 影音视听</h3>
+                <p>经典戏曲、老电影、评书、健康讲座，大字大图标，一键播放不卡顿。</p>
+            </div>
+            <div class="list-item">
+                <h3>5. 线上展馆</h3>
+                <p>云端博物馆、书画展、摄影展，老人足不出户即可线上观展。</p>
+            </div>
+            <div class="list-item">
+                <h3>6. 心理慰藉</h3>
+                <p>情感倾听、心理疏导、孤独感干预服务，支持线上心理咨询与语音陪伴。</p>
+            </div>
+            <div class="list-item">
+                <h3>7. 亲子互动</h3>
+                <p>家庭相册、视频通话教程、亲子活动推荐，增进老人与子女情感连接。</p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 首页按钮 -->
+    <div class="home-btn" onclick="window.location.href='smart_elderly_care.html'">🏠</div>
+</body>
+</html>

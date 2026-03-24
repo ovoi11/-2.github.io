@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>消息</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.5;
+        }
+        
+        /* 顶部栏 */
+        .top-bar {
+            background-color: #fff;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .top-bar .title {
+            text-align: center;
+            flex: 1;
+        }
+        
+        .top-bar .title h1 {
+            font-size: 18px;
+            font-weight: 600;
+        }
+        
+        /* 消息分类 */
+        .message-category {
+            background-color: #fff;
+            margin: 10px;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .category-title {
+            padding: 15px;
+            font-size: 16px;
+            font-weight: bold;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        /* 服务通知 */
+        .notification-list {
+            padding: 10px;
+        }
+        
+        .notification-item {
+            padding: 15px;
+            border-bottom: 1px solid #e0e0e0;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            background-color: #fff;
+        }
+        
+        .notification-item.unread {
+            border-left: 4px solid #3A80E8;
+        }
+        
+        .notification-item.read {
+            background-color: #f5f5f5;
+        }
+        
+        .notification-title {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .notification-content {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 5px;
+        }
+        
+        .notification-time {
+            font-size: 12px;
+            color: #999;
+            text-align: right;
+        }
+        
+        /* 健康提醒 */
+        .health-reminder {
+            background-color: #F2FAF0;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px;
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .health-icon {
+            font-size: 20px;
+            color: #4CAF50;
+            margin-right: 15px;
+        }
+        
+        .health-content {
+            flex: 1;
+        }
+        
+        .health-title {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .health-text {
+            font-size: 14px;
+            color: #666;
+        }
+        
+        /* 家人互动 */
+        .family-interaction {
+            padding: 15px;
+        }
+        
+        .message-bubble {
+            margin-bottom: 15px;
+        }
+        
+        .family-message {
+            max-width: 70%;
+            padding: 10px 15px;
+            border-radius: 18px 18px 18px 0;
+            background-color: #f0f0f0;
+            align-self: flex-start;
+        }
+        
+        .my-message {
+            max-width: 70%;
+            padding: 10px 15px;
+            border-radius: 18px 18px 0 18px;
+            background-color: #E3F2FD;
+            align-self: flex-end;
+            margin-left: auto;
+        }
+        
+        .message-text {
+            font-size: 14px;
+        }
+        
+        .message-time {
+            font-size: 12px;
+            color: #999;
+            margin-top: 5px;
+        }
+        
+        /* 系统公告 */
+        .system-announcement {
+            background-color: #FFF5E3;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px;
+            margin-bottom: 70px;
+        }
+        
+        .announcement-title {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #FF8C00;
+        }
+        
+        .announcement-content {
+            font-size: 14px;
+            color: #666;
+        }
+        
+        /* 底部导航栏 */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: #fff;
+            display: flex;
+            box-shadow: 0 -2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .nav-item {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 10px 0;
+            color: #999;
+            position: relative;
+        }
+        
+        .nav-item.active {
+            color: #3A80E8;
+        }
+        
+        .nav-icon {
+            font-size: 20px;
+            margin-bottom: 5px;
+        }
+        
+        .nav-text {
+            font-size: 12px;
+        }
+        
+        .badge {
+            position: absolute;
+            top: 5px;
+            right: 30%;
+            width: 10px;
+            height: 10px;
+            background-color: #FF4D4F;
+            border-radius: 50%;
+        }
+        
+        /* 响应式设计 - 移动端竖屏优先 */
+        @media (max-width: 767px) {
+            /* 确保在小屏幕上的布局 */
+            .top-bar {
+                padding: 12px;
+            }
+            
+            .top-bar .title h1 {
+                font-size: 16px;
+            }
+            
+            .message-category {
+                margin: 8px;
+            }
+            
+            .category-title {
+                padding: 12px;
+                font-size: 14px;
+            }
+            
+            .notification-list,
+            .family-interaction {
+                padding: 12px;
+            }
+            
+            .notification-item {
+                padding: 12px;
+            }
+            
+            .notification-title {
+                font-size: 14px;
+            }
+            
+            .notification-content {
+                font-size: 13px;
+            }
+            
+            .health-reminder,
+            .system-announcement {
+                margin: 8px;
+                padding: 12px;
+            }
+            
+            .health-title,
+            .announcement-title {
+                font-size: 14px;
+            }
+            
+            .health-text,
+            .announcement-content {
+                font-size: 13px;
+            }
+            
+            .message-bubble {
+                margin-bottom: 12px;
+            }
+            
+            .family-message,
+            .my-message {
+                max-width: 75%;
+                padding: 8px 12px;
+            }
+            
+            .message-text {
+                font-size: 13px;
+            }
+            
+            .nav-icon {
+                font-size: 18px;
+            }
+            
+            .nav-text {
+                font-size: 11px;
+            }
+        }
+        
+        @media (min-width: 768px) {
+            body {
+                max-width: 480px; /* 限制最大宽度为典型手机屏幕宽度 */
+                margin: 0 auto;
+                background-color: #f5f5f5;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 顶部栏 -->
+    <div class="top-bar">
+        <div style="width: 24px;"></div>
+        <div class="title">
+            <h1>消息</h1>
+        </div>
+        <div style="width: 24px;"></div>
+    </div>
+    
+    <!-- 服务通知 -->
+    <div class="message-category">
+        <div class="category-title">服务通知</div>
+        <div class="notification-list">
+            <div class="notification-item unread">
+                <div class="notification-title">订餐成功</div>
+                <div class="notification-content">您的午餐已预订成功，将在12:00送达</div>
+                <div class="notification-time">10:30</div>
+            </div>
+            <div class="notification-item unread">
+                <div class="notification-title">服务上门</div>
+                <div class="notification-content">家政服务人员将在明天上午9:00上门</div>
+                <div class="notification-time">昨天</div>
+            </div>
+            <div class="notification-item read">
+                <div class="notification-title">活动提醒</div>
+                <div class="notification-content">明天下午2:00有健康讲座，请准时参加</div>
+                <div class="notification-time">2天前</div>
+            </div>
+            <div class="notification-item read">
+                <div class="notification-title">缴费提醒</div>
+                <div class="notification-content">您的月度服务费已到期，请及时缴纳</div>
+                <div class="notification-time">3天前</div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 健康提醒 -->
+    <div class="message-category">
+        <div class="category-title">健康提醒</div>
+        <div class="health-reminder">
+            <div class="health-icon">🛡️</div>
+            <div class="health-content">
+                <div class="health-title">用药提醒</div>
+                <div class="health-text">您需要在30分钟后服用降压药</div>
+            </div>
+        </div>
+        <div class="health-reminder">
+            <div class="health-icon">🛡️</div>
+            <div class="health-content">
+                <div class="health-title">测血压提醒</div>
+                <div class="health-text">请在今天下午3:00测量血压</div>
+            </div>
+        </div>
+        <div class="health-reminder">
+            <div class="health-icon">🛡️</div>
+            <div class="health-content">
+                <div class="health-title">复诊提醒</div>
+                <div class="health-text">您的复诊时间是下周一上午10:00</div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 家人互动 -->
+    <div class="message-category">
+        <div class="category-title">家人互动消息</div>
+        <div class="family-interaction">
+            <div class="message-bubble">
+                <div class="family-message">
+                    <div class="message-text">爸妈，周末我们会过来看你们</div>
+                    <div class="message-time">昨天 18:30</div>
+                </div>
+            </div>
+            <div class="message-bubble">
+                <div class="my-message">
+                    <div class="message-text">好的，我们准备些你们爱吃的</div>
+                    <div class="message-time">昨天 18:45</div>
+                </div>
+            </div>
+            <div class="message-bubble">
+                <div class="family-message">
+                    <div class="message-text">这是小宝的最新照片，可爱吗？</div>
+                    <div class="message-time">前天 10:20</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 系统公告 -->
+    <div class="system-announcement">
+        <div class="announcement-title">系统公告</div>
+        <div class="announcement-content">
+            平台将于本周末进行系统升级，升级期间部分功能可能暂时无法使用，请您谅解。升级后将为您带来更好的服务体验。
+        </div>
+    </div>
+    
+    <!-- 底部导航栏 -->
+    <div class="bottom-nav">
+        <div class="nav-item" onclick="window.location.href='smart_elderly_care.html'">
+            <div class="nav-icon">🏠</div>
+            <div class="nav-text">首页</div>
+        </div>
+        <div class="nav-item" onclick="window.location.href='discovery.html'">
+            <div class="nav-icon">📋</div>
+            <div class="nav-text">发现</div>
+        </div>
+        <div class="nav-item active">
+            <div class="nav-icon">💬</div>
+            <div class="nav-text">消息</div>
+            <div class="badge"></div>
+        </div>
+        <div class="nav-item" onclick="window.location.href='my.html'">
+            <div class="nav-icon">👤</div>
+            <div class="nav-text">我的</div>
+        </div>
+    </div>
+</body>
+</html>

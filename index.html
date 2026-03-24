@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>首页-智慧养老</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.5;
+        }
+        
+        /* 顶部栏 */
+        .top-bar {
+            background-color: #fff;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .top-bar .close-btn {
+            font-size: 24px;
+            color: #333;
+            cursor: pointer;
+        }
+        
+        .top-bar .title {
+            text-align: center;
+            flex: 1;
+        }
+        
+        .top-bar .title h1 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+        
+        .top-bar .title .domain {
+            font-size: 12px;
+            color: #999;
+        }
+        
+        .top-bar .more-btn {
+            font-size: 24px;
+            color: #333;
+            cursor: pointer;
+        }
+        
+        /* 头部品牌区 */
+        .header-brand {
+            background-color: #fff;
+            padding: 20px 0;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        
+        .header-brand h2 {
+            font-size: 28px;
+            font-weight: bold;
+            color: #e53935;
+            margin-bottom: 10px;
+        }
+        
+        .banner {
+            width: 100%;
+            height: 180px;
+            background-color: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        .banner img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        /* 核心功能入口区 */
+        .core-functions {
+            background-color: #fff;
+            padding: 20px;
+            margin-bottom: 10px;
+            border-radius: 12px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .function-row {
+            display: flex;
+            margin-bottom: 15px;
+        }
+        
+        .function-btn {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 0 5px;
+            height: 80px;
+            border-radius: 12px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        .function-btn.large {
+            background-color: #e53935;
+            color: #fff;
+            font-size: 24px;
+            box-shadow: 0 4px 8px rgba(229, 57, 53, 0.2);
+        }
+        
+        .function-btn.large:active {
+            transform: translateY(2px);
+            box-shadow: 0 2px 4px rgba(229, 57, 53, 0.2);
+        }
+        
+        .function-btn.small {
+            background-color: #fff;
+            color: #666;
+            font-size: 14px;
+            border: 1px solid #e0e0e0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        
+        .function-btn.small:active {
+            transform: translateY(2px);
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        }
+        
+        /* 天气提醒栏 */
+        .weather-alert {
+            background-color: #fff;
+            padding: 15px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        
+        .weather-icon {
+            font-size: 24px;
+            margin-right: 10px;
+            color: #FF9800;
+        }
+        
+        .weather-text {
+            flex: 1;
+            font-size: 14px;
+            color: #666;
+            line-height: 1.4;
+        }
+        
+        /* 新闻中心板块 */
+        .news-section {
+            background-color: #fff;
+            padding: 20px;
+            margin-bottom: 10px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .section-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #e0e0e0;
+            display: flex;
+            align-items: center;
+        }
+        
+        .section-title::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background-color: #e0e0e0;
+            margin-left: 10px;
+        }
+        
+        .section-title.red {
+            color: #e53935;
+        }
+        
+        .news-card {
+            display: flex;
+            padding: 15px 0;
+            border-bottom: 1px solid #f0f0f0;
+            transition: transform 0.3s ease;
+        }
+        
+        .news-card:hover {
+            transform: translateY(-2px);
+        }
+        
+        .news-card:last-child {
+            border-bottom: none;
+        }
+        
+        .news-image {
+            width: 80px;
+            height: 80px;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-right: 15px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .news-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .news-content {
+            flex: 1;
+        }
+        
+        .news-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #e53935;
+            margin-bottom: 8px;
+        }
+        
+        .news-text {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.4;
+        }
+        
+        /* 养老服务板块 */
+        .service-section {
+            background-color: #fff;
+            padding: 20px;
+            margin-bottom: 70px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .section-title.green {
+            color: #4caf50;
+        }
+        
+        .service-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+        
+        .service-card {
+            background-color: #f9f9f9;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-2px);
+        }
+        
+        .service-image {
+            width: 100%;
+            height: 120px;
+            overflow: hidden;
+        }
+        
+        .service-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        
+        .service-card:hover .service-image img {
+            transform: scale(1.05);
+        }
+        
+        .service-content {
+            padding: 12px;
+        }
+        
+        .service-title {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+        
+        .service-text {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.4;
+        }
+        
+        /* 底部导航栏 */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: #fff;
+            display: flex;
+            box-shadow: 0 -2px 8px rgba(0,0,0,0.1);
+            border-top: 1px solid #e0e0e0;
+        }
+        
+        .nav-item {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 10px 0;
+            color: #999;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-item.active {
+            color: #e53935;
+        }
+        
+        .nav-icon {
+            font-size: 22px;
+            margin-bottom: 5px;
+        }
+        
+        .nav-text {
+            font-size: 12px;
+            font-weight: 500;
+        }
+        
+        /* 头部品牌区 */
+        .header-brand {
+            background-color: #fff;
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 10px;
+            border-radius: 0 0 12px 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .header-brand h2 {
+            font-size: 28px;
+            font-weight: bold;
+            color: #e53935;
+            margin-bottom: 15px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+        
+        .banner {
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        .banner img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .banner:hover img {
+            transform: scale(1.02);
+        }
+        
+        /* 响应式设计 - 移动端竖屏优先 */
+        @media (max-width: 767px) {
+            /* 确保在小屏幕上的布局 */
+            .top-bar {
+                padding: 12px;
+            }
+            
+            .top-bar .title h1 {
+                font-size: 16px;
+            }
+            
+            .top-bar .domain {
+                font-size: 12px;
+            }
+            
+            .header-brand {
+                padding: 15px;
+            }
+            
+            .header-brand h2 {
+                font-size: 24px;
+            }
+            
+            .banner img {
+                height: 150px;
+            }
+            
+            .core-functions {
+                padding: 15px;
+            }
+            
+            .function-btn {
+                height: 70px;
+            }
+            
+            .function-btn.large {
+                font-size: 20px;
+            }
+            
+            .function-btn.small {
+                font-size: 12px;
+            }
+            
+            .weather-alert {
+                padding: 12px;
+            }
+            
+            .news-section,
+            .service-section {
+                padding: 15px;
+            }
+            
+            .news-image {
+                width: 70px;
+                height: 70px;
+            }
+            
+            .service-grid {
+                gap: 10px;
+            }
+            
+            .service-image {
+                height: 100px;
+            }
+        }
+        
+        @media (min-width: 768px) {
+            body {
+                max-width: 480px; /* 限制最大宽度为典型手机屏幕宽度 */
+                margin: 0 auto;
+                background-color: #f5f5f5;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 顶部栏 -->
+    <div class="top-bar">
+        <div class="close-btn">×</div>
+        <div class="title">
+            <h1>首页-智慧养老</h1>
+            <div class="domain">hdheyan.com</div>
+        </div>
+        <div class="more-btn">...</div>
+    </div>
+    
+    <!-- 头部品牌区 -->
+    <div class="header-brand">
+        <h2>智慧养老</h2>
+        <div class="banner">
+                <img src="首页顶部.png" alt="老年人围坐聊天">
+            </div>
+    </div>
+    
+    <!-- 核心功能入口区 -->
+    <div class="core-functions">
+        <div class="function-row">
+            <div class="function-btn large" onclick="window.location.href='medical.html'" style="cursor: pointer;">医</div>
+            <div class="function-btn large" onclick="window.location.href='food.html'" style="cursor: pointer;">食</div>
+            <div class="function-btn large" onclick="window.location.href='entertainment.html'" style="cursor: pointer;">娱</div>
+            <div class="function-btn large" onclick="window.location.href='travel.html'" style="cursor: pointer;">行</div>
+        </div>
+        <h3 style="padding: 15px 0 10px; font-size: 18px; font-weight: bold; color: #e53935;">养老专属快捷服务区</h3>
+        <div class="function-row">
+            <div class="function-btn small" onclick="window.location.href='family_quick_call.html'" style="cursor: pointer; border-radius: 12px; border: 1px solid #e0e0e0;">
+                <div style="font-size: 20px; margin-bottom: 5px;">📞</div>
+                <div>亲情速联</div>
+            </div>
+            <div class="function-btn small" onclick="window.location.href='subsidy_application.html'" style="cursor: pointer; border-radius: 12px; border: 1px solid #e0e0e0;">
+                <div style="font-size: 20px; margin-bottom: 5px;">💰</div>
+                <div>补贴申领</div>
+            </div>
+            <div class="function-btn small" onclick="window.location.href='escort_appointment.html'" style="cursor: pointer; border-radius: 12px; border: 1px solid #e0e0e0;">
+                <div style="font-size: 20px; margin-bottom: 5px;">🏥</div>
+                <div>陪诊预约</div>
+            </div>
+        </div>
+        <div class="function-row">
+            <div class="function-btn small" onclick="window.location.href='anti_fraud.html'" style="cursor: pointer; border-radius: 12px; border: 1px solid #e0e0e0;">
+                <div style="font-size: 20px; margin-bottom: 5px;">🛡️</div>
+                <div>防骗守护</div>
+            </div>
+            <div class="function-btn small" onclick="window.location.href='elderly_adaptation.html'" style="cursor: pointer; border-radius: 12px; border: 1px solid #e0e0e0;">
+                <div style="font-size: 20px; margin-bottom: 5px;">🏠</div>
+                <div>适老改造</div>
+            </div>
+            <div class="function-btn small" onclick="window.location.href='rights_protection.html'" style="cursor: pointer; border-radius: 12px; border: 1px solid #e0e0e0;">
+                <div style="font-size: 20px; margin-bottom: 5px;">⚖️</div>
+                <div>权益维权</div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 天气提醒栏 -->
+    <div class="weather-alert">
+        <div class="weather-icon">☀️</div>
+        <div class="weather-text">今日气温 38℃，防止中暑，出门注意防晒呦！！！</div>
+    </div>
+    
+    <!-- 视频新闻板块 -->
+    <div class="news-section">
+        <h3 class="section-title red">视频新闻</h3>
+        <div class="news-card" onclick="window.location.href='video_news1.html'" style="cursor: pointer;">
+            <div class="news-image">
+                <img src="高龄补贴.jpg" alt="高龄补贴新调整" style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
+            <div class="news-content">
+                <div class="news-title">2024高龄补贴新调整，符合条件就能多领钱</div>
+                <div class="news-text">#养老补贴 #高龄津贴 #惠民政策 #养老福利</div>
+            </div>
+        </div>
+        <div class="news-card" onclick="window.location.href='video_news2.html'" style="cursor: pointer;">
+            <div class="news-image">
+                <img src="高血压.png" alt="高血压居家护理" style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
+            <div class="news-content">
+                <div class="news-title">高血压老人必看！居家测血压的3个误区</div>
+                <div class="news-text">#老年健康 #慢病管理 #居家养生 #健康科普</div>
+            </div>
+        </div>
+        <div class="news-card" onclick="window.location.href='video_news3.html'" style="cursor: pointer;">
+            <div class="news-image">
+                <img src="养老诈骗.png" alt="警惕养老骗局" style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
+            <div class="news-content">
+                <div class="news-title">养老诈骗新套路！"保健品骗局"全拆解</div>
+                <div class="news-text">#养老防骗 #守护钱袋 #反诈科普 #老年权益</div>
+            </div>
+        </div>
+        <div class="news-card" onclick="window.location.href='video_news4.html'" style="cursor: pointer;">
+            <div class="news-image">
+                <img src="社区老年.png" alt="社区老年大学太极班" style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
+            <div class="news-content">
+                <div class="news-title">社区老年大学招生啦！免费课程一键报名</div>
+                <div class="news-text">#老年大学 #社区活动 #老有所学 #银龄生活</div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 社区服务中心模块 -->
+    <div class="service-section">
+        <h3 class="section-title green" style="color: #2E7D32;">社区服务中心</h3>
+        <div class="service-grid">
+            <div class="service-card" onclick="window.location.href='chess_competition.html'" style="cursor: pointer;">
+                <div class="service-image">
+                    <img src="棋牌竞技.png" alt="棋牌竞技">
+                </div>
+                <div class="service-content">
+                    <div class="service-title" style="color: #e53935;">棋牌竞技</div>
+                    <div class="service-text">邻里棋牌赛、日常休闲对弈，以牌会友，丰富晚年休闲生活</div>
+                </div>
+            </div>
+            <div class="service-card" onclick="window.location.href='home_care.html'" style="cursor: pointer;">
+                <div class="service-image">
+                    <img src="上门陪护.png" alt="上门陪护服务">
+                </div>
+                <div class="service-content">
+                    <div class="service-title" style="color: #e53935;">上门陪护服务</div>
+                    <div class="service-text">专业陪护上门服务，陪聊陪诊、生活照料，全方位守护独居老人日常</div>
+                </div>
+            </div>
+            <div class="service-card" onclick="window.location.href='health_clinic.html'" style="cursor: pointer;">
+                <div class="service-image">
+                    <img src="健康义诊.png" alt="健康义诊讲座">
+                </div>
+                <div class="service-content">
+                    <div class="service-title" style="color: #e53935;">健康义诊讲座</div>
+                    <div class="service-text">免费健康义诊、慢病科普讲座，在家门口就能享受专业健康指导</div>
+                </div>
+            </div>
+            <div class="service-card" onclick="window.location.href='tai_chi.html'" style="cursor: pointer;">
+                <div class="service-image">
+                    <img src="太极养生.png" alt="太极养生">
+                </div>
+                <div class="service-content">
+                    <div class="service-title" style="color: #e53935;">太极养生</div>
+                    <div class="service-text">日常太极教学、集体晨练，强身健体、舒缓身心，养成健康生活习惯</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 底部固定导航栏 -->
+    <div class="bottom-nav">
+        <div class="nav-item active">
+            <div class="nav-icon">🏠</div>
+            <div class="nav-text">首页</div>
+        </div>
+        <div class="nav-item" onclick="window.location.href='discovery.html'">
+            <div class="nav-icon">📋</div>
+            <div class="nav-text">发现</div>
+        </div>
+        <div class="nav-item" onclick="window.location.href='message.html'">
+            <div class="nav-icon">💬</div>
+            <div class="nav-text">消息</div>
+        </div>
+        <div class="nav-item" onclick="window.location.href='my.html'">
+            <div class="nav-icon">👤</div>
+            <div class="nav-text">我的</div>
+        </div>
+    </div>
+    
+    <script>
+        // 简单交互：关闭按钮
+        document.querySelector('.close-btn').addEventListener('click', function() {
+            alert('关闭页面');
+        });
+        
+        // 简单交互：更多按钮
+        document.querySelector('.more-btn').addEventListener('click', function() {
+            alert('更多选项');
+        });
+        
+        // 简单交互：导航栏切换
+        document.querySelectorAll('.nav-item').forEach(item => {
+            item.addEventListener('click', function() {
+                // 移除所有激活状态
+                document.querySelectorAll('.nav-item').forEach(nav => {
+                    nav.classList.remove('active');
+                });
+                // 添加当前激活状态
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>

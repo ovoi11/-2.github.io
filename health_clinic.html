@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>健康义诊讲座</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.5;
+        }
+        
+        /* 顶部栏 */
+        .top-bar {
+            background-color: #fff;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .top-bar .back-btn {
+            font-size: 24px;
+            color: #333;
+            cursor: pointer;
+        }
+        
+        .top-bar .title {
+            text-align: center;
+            flex: 1;
+        }
+        
+        .top-bar .title h1 {
+            font-size: 18px;
+            font-weight: 600;
+        }
+        
+        /* 主体内容 */
+        .main-content {
+            padding: 20px;
+        }
+        
+        /* 界面主题 */
+        .theme {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .theme h2 {
+            font-size: 20px;
+            font-weight: bold;
+            color: #e53935;
+        }
+        
+        /* 近期活动预告banner */
+        .activity-banner {
+            background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%);
+            padding: 20px;
+            border-radius: 16px;
+            margin-bottom: 20px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .banner-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #2E7D32;
+        }
+        
+        .banner-button {
+            padding: 12px 30px;
+            background-color: #e53935;
+            color: #fff;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        /* 活动分类标签栏 */
+        .activity-tabs {
+            display: flex;
+            overflow-x: auto;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .activity-tab {
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: bold;
+            white-space: nowrap;
+            cursor: pointer;
+        }
+        
+        .activity-tab.active {
+            background-color: #e53935;
+            color: #fff;
+        }
+        
+        .activity-tab:not(.active) {
+            background-color: #fff;
+            color: #999;
+            border: 1px solid #e0e0e0;
+        }
+        
+        /* 活动列表区 */
+        .activity-list {
+            background-color: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        
+        .section-title {
+            padding: 15px;
+            font-size: 16px;
+            font-weight: bold;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .activity-item {
+            padding: 15px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .activity-item:last-child {
+            border-bottom: none;
+        }
+        
+        .activity-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .activity-name {
+            font-size: 16px;
+            font-weight: bold;
+        }
+        
+        .activity-date {
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .activity-location {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+        
+        .activity-description {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 15px;
+        }
+        
+        .activity-button {
+            padding: 8px 16px;
+            background-color: #e53935;
+            color: #fff;
+            border: none;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        /* 往期活动回顾 */
+        .past-activities {
+            background-color: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        
+        .activities-scroll {
+            padding: 15px;
+            display: flex;
+            overflow-x: auto;
+            gap: 15px;
+        }
+        
+        .activity-card {
+            min-width: 200px;
+            height: 150px;
+            background-color: #f9f9f9;
+            border-radius: 12px;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        
+        .activity-image {
+            width: 100%;
+            height: 80px;
+            background-color: #e0e0e0;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+        
+        .activity-card-name {
+            font-size: 14px;
+            font-weight: bold;
+        }
+        
+        /* 健康科普专区 */
+        .health-education {
+            background-color: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        
+        .health-item {
+            padding: 15px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .health-item:last-child {
+            border-bottom: none;
+        }
+        
+        .health-title {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .health-content {
+            font-size: 14px;
+            color: #666;
+        }
+        
+        /* 响应式设计 - 移动端竖屏优先 */
+        @media (max-width: 767px) {
+            /* 确保在小屏幕上的布局 */
+            .top-bar {
+                padding: 12px;
+            }
+            
+            .top-bar .title h1 {
+                font-size: 16px;
+            }
+            
+            .main-content {
+                padding: 15px;
+            }
+            
+            .theme {
+                padding: 15px;
+            }
+            
+            .theme h2 {
+                font-size: 18px;
+            }
+            
+            .activity-banner {
+                padding: 15px;
+            }
+            
+            .banner-title {
+                font-size: 16px;
+            }
+            
+            .banner-button {
+                padding: 10px 24px;
+                font-size: 14px;
+            }
+            
+            .activity-tab {
+                padding: 6px 12px;
+                font-size: 13px;
+            }
+            
+            .section-title {
+                padding: 12px;
+                font-size: 14px;
+            }
+            
+            .activity-item {
+                padding: 12px;
+            }
+            
+            .activity-name {
+                font-size: 14px;
+            }
+            
+            .activity-date,
+            .activity-location {
+                font-size: 13px;
+            }
+            
+            .activity-description {
+                font-size: 13px;
+            }
+            
+            .activity-button {
+                padding: 6px 12px;
+                font-size: 12px;
+            }
+            
+            .activities-scroll {
+                padding: 12px;
+                gap: 10px;
+            }
+            
+            .activity-card {
+                min-width: 160px;
+                height: 120px;
+                padding: 12px;
+            }
+            
+            .activity-image {
+                height: 60px;
+                font-size: 20px;
+            }
+            
+            .activity-card-name {
+                font-size: 12px;
+            }
+            
+            .health-item {
+                padding: 12px;
+            }
+            
+            .health-title {
+                font-size: 14px;
+            }
+            
+            .health-content {
+                font-size: 13px;
+            }
+        }
+        
+        @media (min-width: 768px) {
+            body {
+                max-width: 480px; /* 限制最大宽度为典型手机屏幕宽度 */
+                margin: 0 auto;
+                background-color: #f5f5f5;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 顶部栏 -->
+    <div class="top-bar">
+        <div class="back-btn" onclick="window.history.back()">←</div>
+        <div class="title">
+            <h1>健康义诊讲座</h1>
+        </div>
+        <div style="width: 24px;"></div>
+    </div>
+    
+    <!-- 主体内容 -->
+    <div class="main-content">
+        <!-- 界面主题 -->
+        <div class="theme">
+            <h2>健康守护·在家门口</h2>
+        </div>
+        
+        <!-- 近期活动预告banner -->
+        <div class="activity-banner">
+            <div class="banner-title">本周六 高血压慢病义诊 社区服务中心一楼</div>
+            <button class="banner-button" onclick="window.location.href='success.html'">预约报名</button>
+        </div>
+        
+        <!-- 活动分类标签栏 -->
+        <div class="activity-tabs">
+            <div class="activity-tab active">全部</div>
+            <div class="activity-tab">免费义诊</div>
+            <div class="activity-tab">健康讲座</div>
+            <div class="activity-tab">慢病科普</div>
+        </div>
+        
+        <!-- 活动列表区 -->
+        <div class="activity-list">
+            <div class="section-title">活动列表</div>
+            <div class="activity-item">
+                <div class="activity-header">
+                    <div class="activity-name">高血压慢病义诊</div>
+                    <div class="activity-date">2026-03-28</div>
+                </div>
+                <div class="activity-location">社区服务中心一楼</div>
+                <div class="activity-description">由社区医院专家团队提供免费血压测量、健康咨询和用药指导服务</div>
+                <button class="activity-button" onclick="window.location.href='success.html'">预约报名</button>
+            </div>
+            <div class="activity-item">
+                <div class="activity-header">
+                    <div class="activity-name">糖尿病健康讲座</div>
+                    <div class="activity-date">2026-04-01</div>
+                </div>
+                <div class="activity-location">社区服务中心二楼会议室</div>
+                <div class="activity-description">邀请内分泌科专家讲解糖尿病的预防与管理，现场解答疑问</div>
+                <button class="activity-button" onclick="window.location.href='success.html'">预约报名</button>
+            </div>
+            <div class="activity-item">
+                <div class="activity-header">
+                    <div class="activity-name">老年人防跌倒讲座</div>
+                    <div class="activity-date">2026-04-05</div>
+                </div>
+                <div class="activity-location">社区服务中心二楼会议室</div>
+                <div class="activity-description">专业康复师讲解老年人防跌倒知识和应急处理方法</div>
+                <button class="activity-button" onclick="window.location.href='success.html'">预约报名</button>
+            </div>
+        </div>
+        
+        <!-- 往期活动回顾 -->
+        <div class="past-activities">
+            <div class="section-title">往期活动回顾</div>
+            <div class="activities-scroll">
+                <div class="activity-card">
+                    <div class="activity-image">🏥</div>
+                    <div class="activity-card-name">春季义诊</div>
+                </div>
+                <div class="activity-card">
+                    <div class="activity-image">📚</div>
+                    <div class="activity-card-name">心血管健康讲座</div>
+                </div>
+                <div class="activity-card">
+                    <div class="activity-image">💊</div>
+                    <div class="activity-card-name">用药安全讲座</div>
+                </div>
+                <div class="activity-card">
+                    <div class="activity-image">🧘</div>
+                    <div class="activity-card-name">老年人养生讲座</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 健康科普专区 -->
+        <div class="health-education">
+            <div class="section-title">健康科普</div>
+            <div class="health-item">
+                <div class="health-title">高血压的日常管理</div>
+                <div class="health-content">保持规律作息，控制饮食盐分，适量运动，定期监测血压，遵医嘱服药。</div>
+            </div>
+            <div class="health-item">
+                <div class="health-title">糖尿病饮食注意事项</div>
+                <div class="health-content">控制总热量，合理分配三餐，选择低GI食物，适量摄入膳食纤维，定期监测血糖。</div>
+            </div>
+            <div class="health-item">
+                <div class="health-title">老年人防跌倒措施</div>
+                <div class="health-content">保持家居环境整洁，安装扶手和防滑设施，穿着合适的鞋子，进行平衡训练。</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

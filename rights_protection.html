@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>权益维权</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.5;
+        }
+        
+        /* 顶部栏 */
+        .top-bar {
+            background-color: #fff;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .top-bar .back-btn {
+            font-size: 24px;
+            color: #333;
+            cursor: pointer;
+        }
+        
+        .top-bar .title {
+            text-align: center;
+            flex: 1;
+        }
+        
+        .top-bar .title h1 {
+            font-size: 18px;
+            font-weight: 600;
+        }
+        
+        /* 主体内容 */
+        .main-content {
+            padding: 20px;
+        }
+        
+        /* 界面主题 */
+        .theme {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .theme h2 {
+            font-size: 20px;
+            font-weight: bold;
+            color: #e53935;
+        }
+        
+        /* 法律援助 */
+        .legal-aid-section {
+            background-color: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        
+        .legal-aid-content {
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .legal-aid-title {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        
+        .legal-aid-button {
+            padding: 12px 30px;
+            background-color: #e53935;
+            color: #fff;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        /* 维权场景 */
+        .rights-section {
+            background-color: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        
+        .section-title {
+            padding: 15px;
+            font-size: 16px;
+            font-weight: bold;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .rights-list {
+            padding: 15px;
+        }
+        
+        .rights-item {
+            padding: 15px;
+            border-bottom: 1px solid #f0f0f0;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .rights-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+        
+        .rights-icon {
+            font-size: 24px;
+            margin-right: 15px;
+            width: 40px;
+            text-align: center;
+        }
+        
+        .rights-info {
+            flex: 1;
+        }
+        
+        .rights-title {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .rights-description {
+            font-size: 14px;
+            color: #666;
+        }
+        
+        /* 法律解读 */
+        .law-section {
+            background-color: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 70px;
+        }
+        
+        .law-content {
+            padding: 15px;
+        }
+        
+        .law-title {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .law-text {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.5;
+        }
+        
+        /* 底部导航栏 */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: #fff;
+            display: flex;
+            box-shadow: 0 -2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .nav-item {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 10px 0;
+            color: #999;
+        }
+        
+        .nav-item.active {
+            color: #e53935;
+        }
+        
+        .nav-icon {
+            font-size: 20px;
+            margin-bottom: 5px;
+        }
+        
+        .nav-text {
+            font-size: 12px;
+        }
+        
+        /* 响应式设计 - 移动端竖屏优先 */
+        @media (max-width: 767px) {
+            /* 确保在小屏幕上的布局 */
+            .top-bar {
+                padding: 12px;
+            }
+            
+            .top-bar .title h1 {
+                font-size: 16px;
+            }
+            
+            .main-content {
+                padding: 15px;
+            }
+            
+            .theme {
+                padding: 15px;
+            }
+            
+            .theme h2 {
+                font-size: 18px;
+            }
+            
+            .legal-aid-section,
+            .rights-section,
+            .law-section {
+                margin-bottom: 15px;
+            }
+            
+            .legal-aid-content {
+                padding: 15px;
+            }
+            
+            .legal-aid-title {
+                font-size: 14px;
+            }
+            
+            .legal-aid-button {
+                padding: 10px 24px;
+                font-size: 14px;
+            }
+            
+            .section-title {
+                padding: 12px;
+                font-size: 14px;
+            }
+            
+            .rights-list {
+                padding: 12px;
+            }
+            
+            .rights-item {
+                padding: 12px;
+                margin-bottom: 12px;
+            }
+            
+            .rights-icon {
+                font-size: 20px;
+                width: 35px;
+            }
+            
+            .rights-title {
+                font-size: 14px;
+            }
+            
+            .rights-description {
+                font-size: 13px;
+            }
+            
+            .law-content {
+                padding: 12px;
+            }
+            
+            .law-title {
+                font-size: 14px;
+            }
+            
+            .law-text {
+                font-size: 13px;
+            }
+            
+            .nav-icon {
+                font-size: 18px;
+            }
+            
+            .nav-text {
+                font-size: 11px;
+            }
+        }
+        
+        @media (min-width: 768px) {
+            body {
+                max-width: 480px; /* 限制最大宽度为典型手机屏幕宽度 */
+                margin: 0 auto;
+                background-color: #f5f5f5;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 顶部栏 -->
+    <div class="top-bar">
+        <div class="back-btn" onclick="window.history.back()">←</div>
+        <div class="title">
+            <h1>权益维权</h1>
+        </div>
+        <div style="width: 24px;"></div>
+    </div>
+    
+    <!-- 主体内容 -->
+    <div class="main-content">
+        <!-- 界面主题 -->
+        <div class="theme">
+            <h2>老年权益·法律守护</h2>
+        </div>
+        
+        <!-- 法律援助 -->
+        <div class="legal-aid-section">
+            <div class="legal-aid-content">
+                <div class="legal-aid-title">法律援助热线</div>
+                <button class="legal-aid-button" onclick="window.location.href='success.html'">12348 法律援助</button>
+            </div>
+        </div>
+        
+        <!-- 维权场景 -->
+        <div class="rights-section">
+            <div class="section-title">维权场景</div>
+            <div class="rights-list">
+                <div class="rights-item">
+                    <div class="rights-icon">👨‍👩‍👧‍👦</div>
+                    <div class="rights-info">
+                        <div class="rights-title">赡养纠纷</div>
+                        <div class="rights-description">解决子女赡养义务相关法律问题</div>
+                    </div>
+                </div>
+                <div class="rights-item">
+                    <div class="rights-icon">🛒</div>
+                    <div class="rights-info">
+                        <div class="rights-title">消费维权</div>
+                        <div class="rights-description">处理老年消费欺诈、虚假宣传等问题</div>
+                    </div>
+                </div>
+                <div class="rights-item">
+                    <div class="rights-icon">🏠</div>
+                    <div class="rights-info">
+                        <div class="rights-title">养老机构纠纷</div>
+                        <div class="rights-description">解决与养老机构的服务合同纠纷</div>
+                    </div>
+                </div>
+                <div class="rights-item">
+                    <div class="rights-icon">📜</div>
+                    <div class="rights-info">
+                        <div class="rights-title">财产继承</div>
+                        <div class="rights-description">处理遗产继承、遗嘱公证等法律问题</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 法律解读 -->
+        <div class="law-section">
+            <div class="section-title">法律解读</div>
+            <div class="law-content">
+                <div class="law-title">老年权益保护法</div>
+                <div class="law-text">
+                    《中华人民共和国老年人权益保障法》是为了保障老年人合法权益，发展老龄事业，弘扬中华民族敬老、养老、助老的美德而制定的法律。本法规定了老年人在家庭赡养与扶养、社会保障、社会服务、社会优待、宜居环境、参与社会发展等方面的权利和保障措施。
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 底部导航栏 -->
+    <div class="bottom-nav">
+        <div class="nav-item" onclick="window.location.href='smart_elderly_care.html'">
+            <div class="nav-icon">🏠</div>
+            <div class="nav-text">首页</div>
+        </div>
+        <div class="nav-item" onclick="window.location.href='discovery.html'">
+            <div class="nav-icon">📋</div>
+            <div class="nav-text">发现</div>
+        </div>
+        <div class="nav-item" onclick="window.location.href='message.html'">
+            <div class="nav-icon">💬</div>
+            <div class="nav-text">消息</div>
+        </div>
+        <div class="nav-item" onclick="window.location.href='my.html'">
+            <div class="nav-icon">👤</div>
+            <div class="nav-text">我的</div>
+        </div>
+    </div>
+</body>
+</html>

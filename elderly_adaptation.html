@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>适老改造</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.5;
+        }
+        
+        /* 顶部栏 */
+        .top-bar {
+            background-color: #fff;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .top-bar .back-btn {
+            font-size: 24px;
+            color: #333;
+            cursor: pointer;
+        }
+        
+        .top-bar .title {
+            text-align: center;
+            flex: 1;
+        }
+        
+        .top-bar .title h1 {
+            font-size: 18px;
+            font-weight: 600;
+        }
+        
+        /* 主体内容 */
+        .main-content {
+            padding: 20px;
+        }
+        
+        /* 界面主题 */
+        .theme {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .theme h2 {
+            font-size: 20px;
+            font-weight: bold;
+            color: #e53935;
+        }
+        
+        /* 预约评估 */
+        .assessment-section {
+            background-color: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        
+        .assessment-content {
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .assessment-title {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        
+        .assessment-button {
+            padding: 12px 30px;
+            background-color: #e53935;
+            color: #fff;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        /* 改造项目 */
+        .project-section {
+            background-color: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        
+        .section-title {
+            padding: 15px;
+            font-size: 16px;
+            font-weight: bold;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .project-grid {
+            padding: 15px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+        
+        .project-item {
+            padding: 20px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .project-icon {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+        
+        .project-name {
+            font-size: 14px;
+            font-weight: bold;
+        }
+        
+        /* 改造案例 */
+        .case-section {
+            background-color: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 70px;
+        }
+        
+        .case-list {
+            padding: 15px;
+        }
+        
+        .case-item {
+            padding: 15px;
+            border-bottom: 1px solid #f0f0f0;
+            margin-bottom: 15px;
+        }
+        
+        .case-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+        
+        .case-image {
+            width: 100%;
+            height: 150px;
+            background-color: #f0f0f0;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+        }
+        
+        .case-title {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .case-description {
+            font-size: 14px;
+            color: #666;
+        }
+        
+        /* 底部导航栏 */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: #fff;
+            display: flex;
+            box-shadow: 0 -2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .nav-item {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 10px 0;
+            color: #999;
+        }
+        
+        .nav-item.active {
+            color: #e53935;
+        }
+        
+        .nav-icon {
+            font-size: 20px;
+            margin-bottom: 5px;
+        }
+        
+        .nav-text {
+            font-size: 12px;
+        }
+        
+        /* 响应式设计 - 移动端竖屏优先 */
+        @media (max-width: 767px) {
+            /* 确保在小屏幕上的布局 */
+            .top-bar {
+                padding: 12px;
+            }
+            
+            .top-bar .title h1 {
+                font-size: 16px;
+            }
+            
+            .main-content {
+                padding: 15px;
+            }
+            
+            .theme {
+                padding: 15px;
+            }
+            
+            .theme h2 {
+                font-size: 18px;
+            }
+            
+            .assessment-section,
+            .project-section,
+            .case-section {
+                margin-bottom: 15px;
+            }
+            
+            .assessment-content {
+                padding: 15px;
+            }
+            
+            .assessment-title {
+                font-size: 14px;
+            }
+            
+            .assessment-button {
+                padding: 10px 24px;
+                font-size: 14px;
+            }
+            
+            .section-title {
+                padding: 12px;
+                font-size: 14px;
+            }
+            
+            .project-grid {
+                padding: 12px;
+                gap: 12px;
+            }
+            
+            .project-item {
+                padding: 15px;
+            }
+            
+            .project-icon {
+                font-size: 28px;
+                margin-bottom: 8px;
+            }
+            
+            .project-name {
+                font-size: 13px;
+            }
+            
+            .case-list {
+                padding: 12px;
+            }
+            
+            .case-item {
+                padding: 12px;
+                margin-bottom: 12px;
+            }
+            
+            .case-image {
+                height: 120px;
+                font-size: 28px;
+            }
+            
+            .case-title {
+                font-size: 14px;
+            }
+            
+            .case-description {
+                font-size: 13px;
+            }
+            
+            .nav-icon {
+                font-size: 18px;
+            }
+            
+            .nav-text {
+                font-size: 11px;
+            }
+        }
+        
+        @media (min-width: 768px) {
+            body {
+                max-width: 480px; /* 限制最大宽度为典型手机屏幕宽度 */
+                margin: 0 auto;
+                background-color: #f5f5f5;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 顶部栏 -->
+    <div class="top-bar">
+        <div class="back-btn" onclick="window.history.back()">←</div>
+        <div class="title">
+            <h1>适老改造</h1>
+        </div>
+        <div style="width: 24px;"></div>
+    </div>
+    
+    <!-- 主体内容 -->
+    <div class="main-content">
+        <!-- 界面主题 -->
+        <div class="theme">
+            <h2>适老改造·居家安全</h2>
+        </div>
+        
+        <!-- 预约评估 -->
+        <div class="assessment-section">
+            <div class="assessment-content">
+                <div class="assessment-title">免费上门评估</div>
+                <button class="assessment-button" onclick="window.location.href='success.html'">立即预约</button>
+            </div>
+        </div>
+        
+        <!-- 改造项目 -->
+        <div class="project-section">
+            <div class="section-title">改造项目</div>
+            <div class="project-grid">
+                <div class="project-item">
+                    <div class="project-icon">🚪</div>
+                    <div class="project-name">防滑扶手安装</div>
+                </div>
+                <div class="project-item">
+                    <div class="project-icon">🧹</div>
+                    <div class="project-name">地面防滑处理</div>
+                </div>
+                <div class="project-item">
+                    <div class="project-icon">📞</div>
+                    <div class="project-name">紧急呼叫器</div>
+                </div>
+                <div class="project-item">
+                    <div class="project-icon">♿</div>
+                    <div class="project-name">无障碍坡道</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 改造案例 -->
+        <div class="case-section">
+            <div class="section-title">改造案例</div>
+            <div class="case-list">
+                <div class="case-item">
+                    <div class="case-image">🏠</div>
+                    <div class="case-title">卫生间适老改造</div>
+                    <div class="case-description">安装防滑扶手、淋浴椅，改造地面防滑，提高卫生间安全系数。</div>
+                </div>
+                <div class="case-item">
+                    <div class="case-image">🏠</div>
+                    <div class="case-title">客厅适老改造</div>
+                    <div class="case-description">调整家具布局，安装夜间感应灯，增加紧急呼叫设备。</div>
+                </div>
+                <div class="case-item">
+                    <div class="case-image">🏠</div>
+                    <div class="case-title">卧室适老改造</div>
+                    <div class="case-description">改造床高度，安装床边扶手，增加夜间照明。</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 底部导航栏 -->
+    <div class="bottom-nav">
+        <div class="nav-item" onclick="window.location.href='smart_elderly_care.html'">
+            <div class="nav-icon">🏠</div>
+            <div class="nav-text">首页</div>
+        </div>
+        <div class="nav-item" onclick="window.location.href='discovery.html'">
+            <div class="nav-icon">📋</div>
+            <div class="nav-text">发现</div>
+        </div>
+        <div class="nav-item" onclick="window.location.href='message.html'">
+            <div class="nav-icon">💬</div>
+            <div class="nav-text">消息</div>
+        </div>
+        <div class="nav-item" onclick="window.location.href='my.html'">
+            <div class="nav-icon">👤</div>
+            <div class="nav-text">我的</div>
+        </div>
+    </div>
+</body>
+</html>
